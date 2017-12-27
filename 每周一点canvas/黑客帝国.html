@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{margin: 0px;padding: 0px;overflow: hidden}
+        #canvas{background: #000;}
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        window.onload=function(){
+            var canvas=document.querySelector("#canvas");
+            var context=canvas.getContext('2d');
+            var w,h;
+            w=canvas.width=window.innerWidth;
+            h=canvas.height=window.innerHeight;
+            // 定义字符串（随意）
+            var str='asdfakoaisuerka78hwruq38457=adpoi4gpawer\sd;""as;ou89qwrja[wp65asd7';
+            var color="#33ff33";
+            var newColor="rgba(0, 0, 0, .1)";
+            var font_size=16;
+            var wordArr=str.split('');
+            var drop=[];
+            drop.length=w/font_size;
+            for(var i=0;i<drop.length;i++){
+                drop[i]=1;
+            }
+
+            function drawded(){
+                // 绘制
+                context.save();
+                context.fillStyle=color;
+                context.font=font_size+'px Arial';
+                for(var i=0;i<drop.length;i++){
+                    var text=wordArr[Math.floor(Math.random()*wordArr.length)];
+                    context.fillText(text,i*font_size,drop[i]*font_size);
+                    if(drop[i]*font_size>h&&Math.random()>0.98){
+                        drop[i]=0;
+                    }
+                    drop[i]++;
+                }
+                context.restore();
+            }
+
+            // 动起来
+            (function draw(){
+                window.requestAnimationFrame(draw,canvas);
+                context.fillStyle=newColor;
+                context.fillRect(0,0,w,h);
+                drawded();
+            }())
+
+            function resize(){
+                w=canvas.width=window.innerWidth;
+                h=canvas.height=window.innerHeight;
+            }
+            canvas.addEventListener('resize',resize);
+        }
+    </script>
+</body>
+</html>
