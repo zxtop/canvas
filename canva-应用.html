@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{ background:black;}
+        #c1{ background:white;}
+    </style>
+</head>
+
+<body>
+    <canvas id="c1" width="400" height="400"></canvas>
+    <script>
+        window.onload=function(){
+            var c1=document.getElementById('c1');
+            var ctx=c1.getContext('2d');
+
+            var d1=new Shape(50,50,50);
+            var d2=new Shape(150, 150, 50);
+
+            c1.onmousedown=function(ev){
+                ev=ev||window.event;
+                var point={
+                    x:ev.clientX-c1.offsetLeft,
+                    y:ev.clientY-c1.offsetTop
+                }
+                d1.reDraw(point);
+                d2.reDraw(point);
+
+            }
+            d1.click=function(){
+                alert('123');
+            }
+            d2.click=function(){
+                alert('456')
+            }
+
+
+            function Shape(x,y,r){
+                this.x=x;
+                this.y=y;
+                this.r=r;
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, 360*Math.PI / 180, false);
+                ctx.fill();
+                ctx.closePath();
+
+            }
+
+            Shape.prototype.reDraw=function(point){
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, 360*Math.PI / 180, false);
+                ctx.fill();
+                ctx.closePath();
+                if(ctx.isPointInPath(point.x,point.y)){
+                    this.click();
+                }
+            }
+
+
+        }
+    </script>
+</body>
+</html>

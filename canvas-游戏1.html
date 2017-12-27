@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{background: #000}
+        #box{width: 600px;margin: 20px auto;}
+        #c1{background: #fff;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <canvas id="c1" width="600" height="600"></canvas>
+    </div>
+    <script>
+        window.onload=function(){
+            var box=document.getElementById('box');
+            var c1=document.getElementById('c1');
+            var ctx=c1.getContext('2d');
+            
+            setInterval(function(){
+
+                ctx.clearRect(0,0,c1.width,c1.height)
+
+                ctx.beginPath();
+                ctx.arc(300,200,200,-90*Math.PI/180,180*Math.PI/180,false);
+                ctx.stroke();
+    
+                ctx.beginPath();
+                ctx.arc(250,200,150,180*Math.PI/180,360*Math.PI/180,false)
+                ctx.stroke();
+    
+                ctx.beginPath();
+                ctx.arc(400,200,20,0*Math.PI/180,360*Math.PI/180,false)
+                ctx.closePath();
+                ctx.stroke();
+                
+                for(var i=0;i<ball.length;i++){
+                    ctx.beginPath();
+                    ctx.moveTo(ball[i].x,ball[i].y);
+                    ctx.arc(ball[i].x,ball[i].y,20,0*Math.PI/180,360*Math.PI/180,false)
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+            },1000/60)
+
+            setInterval(function(){
+                for(var i=0;i<ball.length;i++){
+                    ball[i].num++;
+                    if(ball[i].num==270){
+                        ball[i].startX=250;
+                        ball[i].startY=50;
+                        ball[i].r=150;
+                    }
+                    if(ball[i].num==270+180){
+                        alert('游戏结束');
+                        window.location.reload()//游戏结束刷新页面
+                    }
+                    ball[i].x = Math.sin(ball[i].num*Math.PI/180) * ball[i].r + ball[i].startX;
+                    ball[i].y = ball[i].r - Math.cos(ball[i].num*Math.PI/180) * ball[i].r + ball[i].startY;
+                }
+            },30)
+
+
+
+            var ball=[];
+        
+            setInterval(function(){
+                ball.push({
+                    x:300,
+                    y:0,
+                    r:200,
+                    num:0,
+                    startX:300,
+                    startY:0
+                    })
+            },350)
+        }
+    </script>
+</body>
+</html>

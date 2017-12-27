@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html><head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+        
+                    <meta name="Description" content="All about canvas and jCanvaScript JavaScript library">
+                    <meta name="Keywords" content="JavaScript,canvas,jCanvaScript,library,html5"> 	
+            
+            
+            
+            <script type="text/javascript" src="jCanvaScript.1.5.18.min.js"></script>
+            
+            
+            
+                
+            
+            
+            
+            
+            <!--[if IE 6]><link rel="stylesheet" type="text/css" href="/data/css/ie6.css"><![endif]-->
+                <title>jCanvaScript</title>
+    </head>
+    <body>
+    <div class="content">
+    <div class="pad">
+    
+    
+    <div class="mainExampleHolder">
+        
+        <div class="mainExample">
+            
+            
+            
+            <div class="viewCode">
+                <div class="capture">
+                    <div class="name">View of example
+                    </div>
+                    <div class="stop" id="stop_1">
+                    </div>
+                    <div class="start" id="start_1">
+                    </div>
+                </div>
+                <div>
+                    <script type="text/javascript">
+                        var interval_1=0;
+                        function startShow()
+                        {
+                            var r = Math.floor(Math.random() * (254)),
+                                g = Math.floor(Math.random() * (254)),
+                                b = Math.floor(Math.random() * (254)),
+                                x = Math.floor(Math.random() * (439)),
+                                y = Math.floor(Math.random() * (554)),
+                                color = "rgba("+r+", "+g+", "+b+", 0.5)",
+                                filled = true,
+                                radius = 1;
+                            jc.circle(x, y, radius, color, filled)
+                                .animate({radius:100, opacity:0}, 1500, function(){
+                                    this.del();
+                                });
+                        }
+    
+                        function onload_1(idCanvas)
+                        {
+                            jc.start(idCanvas,25);
+                            interval_1 = setInterval(startShow, 200);
+                        }
+    
+                        function start_1(idCanvas)
+                        {
+                            if(interval_1)return;
+                            onload_1();
+                        }
+    
+                        function stop_1(idCanvas)
+                        {
+                            clearInterval(interval_1);
+                            interval_1 = 0;
+                            jc.clear(idCanvas);
+                        }
+                    </script>
+                    <canvas id="canvas_1" width="440px" height="520px"></canvas>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    </body></html>
+</html>

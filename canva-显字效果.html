@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            body{background: #000;color:white; font-size:30px;}
+            #c1{background: #fff;}
+    </style>
+</head>
+<body>
+
+    <canvas id="c1" width="400" height="400"></canvas>
+    <ul style="float:left;">
+            <li>前</li>
+            <li>端</li>
+            <li>你</li>
+            <li>好</li>
+        </ul>
+    <script>
+        window.onload=function(){
+            var c1=document.getElementById("c1");
+            var canva=c1.getContext('2d');
+            var ali=document.getElementsByTagName('li');
+
+            for(var i=0;i<ali.length;i++){
+                ali[i].onclick=function(){
+                    var str=this.innerHTML;
+                    canva.clearRect(0, 0, c1.width, c1.height);
+
+
+                    var h=180;
+                    canva.font=h+'px impact';
+                    canva.textBaseline='top';
+                    canva.fillStyle='red';
+                    var w=canva.measureText(str).width;
+                    canva.fillText(str,(c1.width-w)/2,(c1.height-h)/2,w,h);
+
+                    var img=canva.getImageData((c1.width-w)/2,(c1.height-h)/2,w,h);
+                    canva.clearRect(0, 0, c1.width, c1.height);
+                    
+                    var arr=randomArr(w*h,w*h/10);
+                    var newImg=canva.createImageData(w,h);
+                    for(var i=0;i<arr.length;i++){
+                        newImg.data[4*arr[i]] = img.data[4*arr[i]];
+                        newImg.data[4*arr[i]+1] = img.data[4*arr[i]+1];
+                        newImg.data[4*arr[i]+2] = img.data[4*arr[i]+2];
+                        newImg.data[4*arr[i]+3] = img.data[4*arr[i]+3];
+                    }
+                    canva.putImageData(newImg,(c1.width-w)/2,(c1.height-h)/2)
+                }
+            }
+
+            function randomArr(iAll,iNow){
+                var arr = [];
+                var newArr = [];
+                for(var i=0;i<iAll;i++){
+                    arr.push(i);
+                }
+                
+                for(var i=0;i<iNow;i++){
+                    newArr.push( arr.splice( Math.floor(Math.random()*arr.length) ,1) );
+                }
+                return newArr;
+            }
+
+        }
+    </script>
+</body>
+</html>

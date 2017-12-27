@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            body{background: #000;}
+            #c1{background: #fff;}
+    </style>
+</head>
+<body>
+
+    <canvas id="c1" width="400" height="400"></canvas>
+    <script>
+        window.onload=function(){
+            var c1=document.getElementById("c1");
+            var canva=c1.getContext('2d');
+            canva.font='60px impact';
+            canva.textBaseline='top';
+            canva.shadowOffsetX=10;
+            canva.shadowBlur=3;
+            canva.shadowColor='#ccc'
+
+            var w=canva.measureText('asdf').width;
+            // canva.fillText('填写文字',100,100)
+            // canva.strokeText('提阿尼',100,200)
+            canva.strokeText('asdf',(c1.width-w)/2,(c1.height-60)/2)
+        }
+    </script>
+</body>
+</html>
