@@ -20,6 +20,7 @@
             // alert(num.toFixed(0))
 
         window.onload=function(){
+
             var box=document.getElementById('box');
             var canvas=document.getElementById('canvas');
             var context=canvas.getContext('2d');
@@ -30,13 +31,7 @@
             var contY=canvas.height/2;
             var contX=canvas.width/2;
 
-
-
-            setInterval(function(){
-
-
-                
-                context.clearRect(0,0,canvas.width,canvas.height)
+            function whiteCirle(){
                 // 画一个白边的圆
                 context.save();
                 context.strokeStyle='#fff';
@@ -45,6 +40,9 @@
                 context.closePath();
                 context.stroke();
                 context.restore();
+            }
+
+            function text(speed){
                 // 写入字
                 context.save();
                 context.strokeStyle="#49f";
@@ -52,7 +50,9 @@
                 context.strokeText(speed.toFixed(0)+'%',contX-20,contY+10);
                 context.stroke();
                 context.restore();
+            }
 
+            function blue(speed){
                 // 画一个圆
                 context.save();
                 context.strokeStyle='#49f';
@@ -62,11 +62,30 @@
                 // context.closePath();
                 context.stroke();
                 context.restore();
+            }
+
+            // 动画循环
+            (function draw(){
+
+                window.requestAnimationFrame(draw,canvas);
+                context.clearRect(0,0,canvas.width,canvas.height)
+                whiteCirle();
+                text(speed);
+                blue(speed);
 
                 speed+=0.1;
                 if(speed>100){speed=0}
 
-            },1000/60)
+            }());
+            // setInterval(function(){
+
+
+                
+                
+
+
+
+            // },1000/60)
         }
     </script>
 </body>
