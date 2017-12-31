@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="utils.js"></script>
+</head>
+<body>
+    <canvas id="c1" width="500" height="500" style="background:#000"></canvas>
+    <script>
+        window.onload=function(){
+            var canvas=document.getElementById('c1');
+            mouse=utils.captureMouse(canvas);
+            canvas.addEventListener('mousedown',function(event){
+                console.log("x"+mouse.x+"y"+mouse.y);
+            })
+
+            // 定义键盘事件
+            function okeyboard(event){
+                switch(event.keyCode){
+                    case 38:
+                    console.log('up');
+                    break;
+                    case 40:
+                    console.log('down');
+                    break;
+                    case 37:
+                    console.log('left');
+                    break;
+                    case 39:
+                    console.log('right');
+                    break;
+                    default:
+                    console.log(event.keyCode);
+                }
+            }
+            window.addEventListener('keydown',okeyboard,false)
+        }
+    </script>
+</body>
+</html>
