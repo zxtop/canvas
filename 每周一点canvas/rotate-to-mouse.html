@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./utils.js"></script>
+    <script src="./arrow.js"></script>
+</head>
+<body>
+    <canvas id="c1" width="500" height="500" style="background:#ccc"></canvas>
+    <script>
+        window.onload=function(){
+            var canvas=document.getElementById('c1');
+            var context=canvas.getContext('2d');
+            var conterX=canvas.width/2;
+            var conterY=canvas.height/2;
+            //传入canvas,获取鼠标在canvas上的坐标
+            var mouse=utils.captureMouse(canvas);
+            // 创建arrow对象
+            var arrow=new Arrow();
+            arrow.x=conterX;
+            arrow.y=conterY;
+            // 动画循环函数
+            (function drawFrame(){
+                window.requestAnimationFrame(drawFrame,canvas);
+                context.clearRect(0,0,canvas.width,canvas.height);
+                // 获取dy,dx值
+                var dx=mouse.x-arrow.x;
+                var dy=mouse.y-arrow.y;
+                // 设置旋转角度
+                arrow.rotation=Math.atan2(dy,dx);
+                // 调用arrow的draw方法画出
+                arrow.draw(context);
+            }())
+        }
+    </script>
+</body>
+</html>
